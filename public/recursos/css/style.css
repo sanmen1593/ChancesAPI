@@ -1,0 +1,58 @@
+#header{
+    background: #237d4a;
+    padding: 10px 0 10px 0;
+}
+#container_first{
+    padding: 20px 0 20px 0;
+}
+
+#button_login{
+    width: 100%;
+    background: #237d4a;
+    color: #fff;
+}
+
+.fullwidth{
+    width: 100%;
+    background: #237d4a;
+}
+.form-register{
+    display: inline-block;
+}
+.title_page{
+    color: #fff;
+
+    text-transform: uppercase;
+
+}
+.pading_top{
+    padding-top: 50px;
+
+}
+
+.buttons{
+    padding-top: 10px;
+}
+
+#hello{
+    color: white;
+}
+.headercolor{
+    background: #237d4a;
+    border-color:#237d4a;
+}
+
+#bs-example-navbar-collapse-1 .navbar-nav>li>a:focus, #bs-example-navbar-collapse-1 .navbar-nav>li>a:hover{
+    background-color: #2FBE6E;
+}
+
+/* Lista de chances */
+.chancelist {
+  margin-right:10px;
+}
+.chancelist .row {
+  margin-bottom: 10px;
+}
+.panel-title {
+  color: #3c763d;;
+}
