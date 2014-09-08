@@ -33,6 +33,16 @@ App::after(function($request, $response)
 |
 */
 
+Route::filter('checktoken', function($token)
+{
+    $user = User::where('authentication_token', '=', $token)->get();
+    if($token && $user->count() > 0){
+        return Redirect::guest('login');
+    }else{
+        return Response::make('Unauthorized', 401);
+    }
+});
+
 Route::filter('auth', function()
 {
 	if (Auth::guest())

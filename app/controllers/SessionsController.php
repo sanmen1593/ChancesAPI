@@ -3,7 +3,7 @@
 class SessionsController extends \BaseController {
 
     public function index() {
-        //
+        
     }
 
     public function create() {
@@ -38,21 +38,24 @@ class SessionsController extends \BaseController {
     }
 
     public function show($id) {
-        //
+        
     }
 
     public function edit($id) {
-        //
+        
     }
 
     public function update($id) {
-        //
+        
     }
 
     public function destroy() {
-        Auth::user()->update(['authentication_token' => null]);
-        Auth::logout();
-        return Redirect::intended('login');
+        if (Auth::check()) {
+            Auth::user()->update(['authentication_token' => null]);
+            Auth::logout();
+        } else {
+            return Redirect::intended('login');
+        }
     }
 
 }

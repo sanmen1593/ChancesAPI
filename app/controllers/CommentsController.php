@@ -10,7 +10,7 @@ class CommentsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+            return Comment::all()->toJson();
 	}
 
 	/**
