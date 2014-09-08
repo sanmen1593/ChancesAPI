@@ -5,11 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateRatedsTable extends Migration {
 
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up() {
         Schema::create('rateds', function(Blueprint $table) {
             $table->increments('id');
@@ -24,12 +19,7 @@ class CreateRatedsTable extends Migration {
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down() {
         Schema::drop('rateds');
     }

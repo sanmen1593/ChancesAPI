@@ -20,6 +20,7 @@ class CreateUsers extends Migration {
             $table->string('password');
             $table->boolean('status');
             $table->string('remember_token')->nullable();
+            $table->string('authentication_token')->nullable();
             $table->timestamps();
         });
     }

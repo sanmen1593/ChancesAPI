@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'chanceros123',
+	'key' => 'ChancerosIngSistemasTecnologica2',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
