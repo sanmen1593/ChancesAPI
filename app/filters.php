@@ -48,13 +48,9 @@ Route::filter('auth.basic', function() {
 
 Route::filter('checktoken', function() {
     $datos = Input::header();
-    $token = $datos['token'];
+    $token = $datos['auth-token'];
     $user = User::where('authentication_token', '=', $token)->get();
-    if ($token && $user->count() > 0) {
-        return Redirect::guest('login');
-    } else {
-        return Response::make('Unauthorized', 401);
-    }
+    if ($user->count() == 0) return Response::make('Unauthorized', 401);
 });
 
 /*

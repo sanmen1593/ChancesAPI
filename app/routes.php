@@ -17,6 +17,7 @@ Route::group(array('before' => 'checktoken'), function()
     Route::get('registervehicle', 'VehicleController@create');
     Route::get('vehiclelist', 'VehicleController@index');
     Route::resource('vehicle', 'VehicleController');
+    
 
     Route::get('chanceslist', 'ChanceController@index');
     Route::get('registerchance', 'ChanceController@create');
