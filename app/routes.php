@@ -10,7 +10,7 @@
   | and give it the Closure to execute when that URI is requested.
   |
  */
-Route::group(array('before' => 'auth'), function()
+Route::group(array('before' => 'checktoken'), function()
 {
     Route::resource('user', 'UserController');
 
