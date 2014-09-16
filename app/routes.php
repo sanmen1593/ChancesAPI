@@ -10,29 +10,21 @@
   | and give it the Closure to execute when that URI is requested.
   |
  */
-Route::group(array('before' => 'checktoken'), function()
-{
+Route::group(array('before' => 'checktoken'), function() {
     Route::resource('user', 'UserController');
-
     Route::get('registervehicle', 'VehicleController@create');
     Route::get('vehiclelist', 'VehicleController@index');
     Route::resource('vehicle', 'VehicleController');
-    
-
     Route::get('chanceslist', 'ChanceController@index');
     Route::get('registerchance', 'ChanceController@create');
     Route::resource('chance', 'ChanceController');
-
     Route::resource('usersofchance', 'UsersofChanceController');
-
     Route::resource('comments', 'CommentsController');
     Route::resource('rated', 'RatedController');
-
     Route::get('profile', function() {
-        $vehicle = DB::table('vehicles')->where('users_id', '=', Auth::user()->id)->get();
+        $vehicle = Vehicle::where('users_id', '=', Auth::user()->id)->get();
         return View::make('users.profile')->with('vehicles', $vehicle);
     });
-    
 });
 
 Route::get('/', 'SessionsController@create');

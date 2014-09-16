@@ -8,9 +8,9 @@ class ChanceController extends \BaseController {
      * @return Response
      */
     public function index() {
-        $chances = Chance::where('date', '>=', new DateTime('today'))->get()->toJson();
-        return $chances;
-//        return View::make('chances.chanceslist', compact('chances') );
+        $chances = Chance::where('date', '>=', new DateTime('today'))->get();//->toJson();
+//        return $chances;
+        return View::make('chances.chanceslist', compact('chances') );
     }
 
     /**
