@@ -28,7 +28,7 @@ Route::group(array('before' => 'checktoken'), function() {
 });
 
 Route::get('/', 'SessionsController@create');
-
+Route::post('/signup', 'UserController@store');
 Route::get('login', 'SessionsController@create');
 Route::get('logout', 'SessionsController@destroy');
 Route::resource('sessions', 'SessionsController');

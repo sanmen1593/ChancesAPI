@@ -50,7 +50,9 @@ Route::filter('checktoken', function() {
     $datos = Input::header();
     $token = $datos['auth-token'];
     $user = User::where('authentication_token', '=', $token)->get();
-    if ($user->count() == 0) return Response::make('Unauthorized', 401);
+    if ($user->count() == 0) {
+        return Response::make('Unauthorized', 401);
+    }
 });
 
 /*
