@@ -34,7 +34,7 @@ class UserController extends \BaseController {
             User::create($data);
             $message->to($data['email'], $data['name'])->subject('Welcome to ChancerosUTB!');
         });
-        return Redirect::intended('/login');
+        return json_encode(array('message' => 'Registro éxitoso'));
     }
 
     /**
@@ -46,12 +46,11 @@ class UserController extends \BaseController {
     public function show($id) {
         $user = User::find($id);
         if ($user == null) {
-            $message = 'El usuario no existe.';
-            return View::make('users.profile', compact('message'));
+            return json_encode(array('message' => 'El usuario no existe.'));
         }else if($user->id== Auth::user()->id){
-            return View::make('users.profile');
+            return Auth::user()->toJson();
         }else{
-            return View::make('users.publicprofile', compact('user'));
+            return $user->toJson();
         }
     }
 
@@ -80,7 +79,7 @@ class UserController extends \BaseController {
         $user2->email = $user['email'];
         $user2->password = $user['password'];
         $user2->save();
-        return Redirect::intended('/profile');
+        return json_encode(array('message'=>'Usuario actualizado correctamente.'));
     }
 
     /**
