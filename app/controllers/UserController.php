@@ -27,14 +27,24 @@ class UserController extends \BaseController {
      */
     public function store() {
         $post_data = Input::all();
-        Mail::send('emails.welcome', $data = array('post_data' => $post_data), function($message) {
-            $data = Input::all();
-            $data['password'] = Hash::make($data['password']);
-            $data['status'] = true;
-            User::create($data);
-            $message->to($data['email'], $data['name'])->subject('Welcome to ChancerosUTB!');
-        });
-        return json_encode(array('message' => 'Registro éxitoso'));
+        $rules = [
+            'name' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
+            'confirm_email' => 'required'
+        ];
+        $validate = Validator::make($post_data, $rules);
+        if ($validate) {
+            Mail::send('emails.welcome', $data = array('post_data' => $post_data), function($message) {
+                $data = Input::all();
+                $data['password'] = Hash::make($data['password']);
+                $data['status'] = true;
+                User::create($data);
+                $message->to($data['email'], $data['name'])->subject('Welcome to ChancerosUTB!');
+            });
+            return json_encode(array('message' => 'Registro éxitoso'));
+        }
     }
 
     /**
@@ -47,9 +57,9 @@ class UserController extends \BaseController {
         $user = User::find($id);
         if ($user == null) {
             return json_encode(array('message' => 'El usuario no existe.'));
-        }else if($user->id== Auth::user()->id){
+        } else if ($user->id == Auth::user()->id) {
             return Auth::user()->toJson();
-        }else{
+        } else {
             return $user->toJson();
         }
     }
@@ -73,13 +83,23 @@ class UserController extends \BaseController {
      */
     public function update($id) {
         $user = Input::all();
-        $user2 = User::find($user['id']);
-        $user2->name = $user['name'];
-        $user2->lastname = $user['lastname'];
-        $user2->email = $user['email'];
-        $user2->password = $user['password'];
-        $user2->save();
-        return json_encode(array('message'=>'Usuario actualizado correctamente.'));
+        $rules = [
+            'name' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
+            'confirm_email' => 'required'
+        ];
+        $validate = Validator::make($post_data, $rules);
+        if ($validate) {
+            $user2 = User::find($user['id']);
+            $user2->name = $user['name'];
+            $user2->lastname = $user['lastname'];
+            $user2->email = $user['email'];
+            $user2->password = $user['password'];
+            $user2->save();
+            return json_encode(array('message' => 'Usuario actualizado correctamente.'));
+        }
     }
 
     /**

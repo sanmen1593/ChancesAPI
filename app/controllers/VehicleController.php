@@ -13,10 +13,21 @@ class VehicleController extends \BaseController {
 
     public function store() {
         $vehicle = Input::all();
-        $vehicle['users_id'] = Auth::user()->id;
-        $vehicle['status'] = true;
-        Vehicle::create($vehicle);
-        return json_encode($vehicle);
+        $rule = [
+            'plate' => 'required',
+            'color' => 'required',
+            'brand' => 'required',
+            'model' => 'required',
+            'capacity' => 'required',
+            'type' => 'required'
+        ];
+        $validate = Validator::make($post_data, $rules);
+        if ($validate) {
+            $vehicle['users_id'] = Auth::user()->id;
+            $vehicle['status'] = true;
+            Vehicle::create($vehicle);
+            return json_encode($vehicle);
+        }
     }
 
     public function show($id) {
@@ -31,15 +42,26 @@ class VehicleController extends \BaseController {
 
     public function update($id) {
         $vehicle = Input::all();
-        $vehicle2 = Vehicle::find($vehicle['id']);
-        $vehicle2->plate = $vehicle['plate'];
-        $vehicle2->color = $vehicle['color'];
-        $vehicle2->brand = $vehicle['brand'];
-        $vehicle2->model = $vehicle['model'];
-        $vehicle2->capacity = $vehicle['capacity'];
-        $vehicle2->type = $vehicle['type'];
-        $vehicle2->save();
-        return json_encode($vehicle);
+        $rule = [
+            'plate' => 'required',
+            'color' => 'required',
+            'brand' => 'required',
+            'model' => 'required',
+            'capacity' => 'required',
+            'type' => 'required'
+        ];
+        $validate = Validator::make($post_data, $rules);
+        if ($validate) {
+            $vehicle2 = Vehicle::find($vehicle['id']);
+            $vehicle2->plate = $vehicle['plate'];
+            $vehicle2->color = $vehicle['color'];
+            $vehicle2->brand = $vehicle['brand'];
+            $vehicle2->model = $vehicle['model'];
+            $vehicle2->capacity = $vehicle['capacity'];
+            $vehicle2->type = $vehicle['type'];
+            $vehicle2->save();
+            return json_encode($vehicle);
+        }
     }
 
     public function destroy() {

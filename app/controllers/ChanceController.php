@@ -1,4 +1,6 @@
-<?php use Carbon\Carbon;
+<?php
+
+use Carbon\Carbon;
 
 class ChanceController extends \BaseController {
 
@@ -8,9 +10,9 @@ class ChanceController extends \BaseController {
      * @return Response
      */
     public function index() {
-        $chances = Chance::where('date', '>=', new DateTime('today'))->get();//->toJson();
+        $chances = Chance::where('date', '>=', new DateTime('today'))->get(); //->toJson();
 //        return $chances;
-        return View::make('chances.chanceslist', compact('chances') );
+        return View::make('chances.chanceslist', compact('chances'));
     }
 
     /**
@@ -34,9 +36,18 @@ class ChanceController extends \BaseController {
      */
     public function store() {
         $chance = Input::all();
-        $chance['users_id'] = Auth::user()->id;
-        Chance::create($chance);
-        return Redirect::intended('/chanceslist');
+        $rules = [
+            'name' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => ''
+        ];
+        $validate = Validator::make($post_data, $rules);
+        if ($validator) {
+            $chance['users_id'] = Auth::user()->id;
+            Chance::create($chance);
+            return Redirect::intended('/chanceslist');
+        }
     }
 
     /**

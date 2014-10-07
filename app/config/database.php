@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'chanceutb',
 			'username'  => 'root',
-			'password'  => 'sanmen',
+			'password'  => 'thomas4',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
