@@ -12,7 +12,7 @@ class UserTableSeeder extends Seeder {
             'email' => 'santiagomendozar@gmail.com',
             'password' => Hash::make('sanmen'),
             'status' => true,
-            'confirmemail' => 'santiagomendozar@gmail.com'
+            'email_confirmation' => 'santiagomendozar@gmail.com'
         ));
 
         User::create(array(
@@ -22,7 +22,7 @@ class UserTableSeeder extends Seeder {
             'email' => 'cristianoliveros_27@hotmail.com',
             'password' => Hash::make('colombia12345'),
             'status' => true,
-            'confirmemail' => 'cristianoliveros_27@hotmail.com'
+            'email_confirmation' => 'cristianoliveros_27@hotmail.com'
         ));
         
         User::create(array(
@@ -32,7 +32,7 @@ class UserTableSeeder extends Seeder {
             'email' => 'belkis_buelvas06@hotmail.com',
             'password' => Hash::make('thomas4'),
             'status' => true,
-            'confirmemail' => 'belkis_buelvas06@hotmail.com'
+            'email_confirmation' => 'belkis_buelvas06@hotmail.com'
         ));
         
         User::create(array(
@@ -42,7 +42,7 @@ class UserTableSeeder extends Seeder {
             'email' => 'jotallamas@gmail.com',
             'password' => Hash::make('12345'),
             'status' => true,
-            'confirmemail' => 'jotallamas@gmail.com'
+            'email_confirmation' => 'jotallamas@gmail.com'
         ));
     }
 

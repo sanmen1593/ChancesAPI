@@ -2,40 +2,31 @@
 
 class UserController extends \BaseController {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function index() {
-        //
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
     public function create() {
         
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
     public function store() {
         $post_data = Input::all();
-        $rules = [
+        $rules = array(
             'name' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'confirm_email' => 'required'
-        ];
-        $validate = Validator::make($post_data, $rules);
-        if ($validate) {
+            'password' => 'required|confirmed',
+            'email_confirmation' => 'required'
+        );
+        $messages = array(
+            'required' => 'The :attribute field is required',
+            'email' => 'The :attribute must be a valid email.',
+            'email.unique' => 'The email is already registered.',
+            'confirmed' => 'The :attribute have to be equal.'
+        );
+        $validate = Validator::make($post_data, $rules, $messages);
+        if ($validate->passes()) {
             Mail::send('emails.welcome', $data = array('post_data' => $post_data), function($message) {
                 $data = Input::all();
                 $data['password'] = Hash::make($data['password']);
@@ -44,15 +35,11 @@ class UserController extends \BaseController {
                 $message->to($data['email'], $data['name'])->subject('Welcome to ChancerosUTB!');
             });
             return json_encode(array('message' => 'Registro éxitoso'));
+        } else {
+            return $validate->messages();
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function show($id) {
         $user = User::find($id);
         if ($user == null) {
@@ -64,34 +51,28 @@ class UserController extends \BaseController {
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function edit($id) {
         $user = User::find($id);
         return View::make('users.edit')->with('user', $user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function update($id) {
         $user = Input::all();
-        $rules = [
+        $rules = array(
             'name' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'confirm_email' => 'required'
-        ];
-        $validate = Validator::make($post_data, $rules);
-        if ($validate) {
+            'password' => 'required|confirmed',
+            'email_confirmation' => 'required'
+        );
+        $messages = array(
+            'required' => 'The :attribute field is required',
+            'email' => 'The :attribute must be a valid email.',
+            'email.unique' => 'The email is already registered.',
+            'confirmed' => 'The :attribute have to be equal.'
+        );
+        $validate = Validator::make($post_data, $rules, $messages);
+        if ($validate->passes()) {
             $user2 = User::find($user['id']);
             $user2->name = $user['name'];
             $user2->lastname = $user['lastname'];
@@ -99,17 +80,13 @@ class UserController extends \BaseController {
             $user2->password = $user['password'];
             $user2->save();
             return json_encode(array('message' => 'Usuario actualizado correctamente.'));
+        } else {
+            return $validate->messages();
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function destroy($id) {
-        //
+        
     }
 
 }

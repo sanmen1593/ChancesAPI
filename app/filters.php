@@ -47,7 +47,7 @@ Route::filter('auth.basic', function() {
 });
 
 Route::filter('checktoken', function() {
-    $datos = Input::header();
+    $datos = Input::all();
     $token = $datos['auth-token'];
     $user = User::where('authentication_token', '=', $token)->get();
     if ($user->count() == 0) {
