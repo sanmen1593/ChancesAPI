@@ -15,7 +15,7 @@ class UserController extends \BaseController {
         $rules = array(
             'name' => 'required',
             'lastname' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users,email|confirmed',
             'email_confirmation' => 'required|confirmed',
             'password' => 'required'
         );
@@ -61,7 +61,7 @@ class UserController extends \BaseController {
         $rules = array(
             'name' => 'required',
             'lastname' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users,email|confirmed',
             'email_confirmation' => 'required|confirmed',
             'password' => 'required'
         );
