@@ -16,8 +16,8 @@ class UserController extends \BaseController {
             'name' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed',
-            'email_confirmation' => 'required'
+            'email_confirmation' => 'required|confirmed',
+            'password' => 'required'
         );
         $messages = array(
             'required' => 'The :attribute field is required',
@@ -62,8 +62,8 @@ class UserController extends \BaseController {
             'name' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed',
-            'email_confirmation' => 'required'
+            'email_confirmation' => 'required|confirmed',
+            'password' => 'required'
         );
         $messages = array(
             'required' => 'The :attribute field is required',

@@ -36,14 +36,34 @@ class ChanceController extends \BaseController {
      */
     public function store() {
         $chance = Input::all();
-        $rules = [
-            'name' => 'required',
-            'lastname' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => ''
-        ];
-        $validate = Validator::make($post_data, $rules);
-        if ($validator) {
+        $rules = array(
+            'fee' => 'required',
+            'date' => 'required',
+            'hour' => 'required',
+            'destination' => 'required',
+            'departure' => 'required',
+            'capacity' => 'required|integer',
+            'comments' => 'required',
+            'route' => 'required|integer', // 1. Avenida 2. Mamonal 3. Bosque 4. Otros
+            'vehicles_id' => 'required|integer'
+        );
+        
+        /*
+         $table->float('fee')->nullable();
+            $table->date('date');
+            $table->string('hour');
+            $table->string('destination');
+            $table->string('departure');
+            $table->integer('capacity');
+            $table->string('comments')->nullable();
+            $table->integer('route'); // 1. Avenida 2. Mamonal 3. Bosque 4. Otros
+            $table->integer('vehicles_id')->unsigned();
+         */
+        $messages = array(
+            '' => ''
+        );
+        $validate = Validator::make($chance, $rules, $messages);
+        if ($validate) {
             $chance['users_id'] = Auth::user()->id;
             Chance::create($chance);
             return Redirect::intended('/chanceslist');
