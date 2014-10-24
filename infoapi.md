@@ -5,35 +5,35 @@
 Con el usuario se pueden realizar las siguientes acciones:
 - Registrar usuario:
 	URL: /signup
-	Datos:
-		name
-		lastname
-		email
-		email_confirmation
-		password
+	Datos:</br>
+		name</br>
+		lastname</br>
+		email</br>
+		email_confirmation</br>
+		password</br>
 	Método: POST
 
 - Iniciar sesión: 
-	URL: /login
-	Datos:
-		email
-		password
-	Método: POST
-	
+	URL: /login</br>
+	Datos:</br>
+		email</br>
+		password</br>
+	Método: POST</br>
+
 - Editar usuario:
-	URL: /signup
-	Datos:
-		name
-		lastname
-		email
-		email_confirmation
-		password
+	URL: /signup</br>
+	Datos:</br>
+		name</br>
+		lastname</br>
+		email</br>
+		email_confirmation</br>
+		password</br>
 	Método: POST
 	
-- Cerrar sesión:
-	URL: /logout
-	Datos:
-	Método: GET
+- Cerrar sesión:</br>
+	URL: /logout</br>
+	Datos:</br>
+	Método: GET</br>
 	
 	
 # Vehicle 
@@ -43,28 +43,28 @@ para todas las peticiones.)
 Con los vehículos se pueden realizar las siguientes acciones:
 
 - Registrar vehículo:
-	URL: /vehicle
-	Datos:
-		plate (String XXX000 o XXX00X)
-		color (string)
-		brand (string)
-		model (string)
-		capacity (int)
-		type (int 1. Carros/Camionetas 2. Motos 3. Otros )
-	Método: POST
+	URL: /vehicle</br>
+	Datos:</br>
+		plate (String XXX000 o XXX00X)</br>
+		color (string)</br>
+		brand (string)</br>
+		model (string)</br>
+		capacity (int)</br>
+		type (int 1. Carros/Camionetas 2. Motos 3. Otros )</br>
+	Método: POST</br>
 	
-- Editar vehículo:
-	URL: /vehicle/{id} // id del vehiculo
-	Datos:
+- Editar vehículo:</br>
+	URL: /vehicle/{id} // id del vehiculo</br>
+	Datos:</br>
 		
-	Método: PUT/PATCH
+	Método: PUT/PATCH</br>
 	
-- "Eliminar" vehículo:
-	URL: /vehicle/{id} // id del vehículo
-	Datos:
-	Método: DELETE
+- "Eliminar" vehículo:</br>
+	URL: /vehicle/{id} // id del vehículo</br>
+	Datos:</br>
+	Método: DELETE</br>
 	
 - Listar vehículos:
-	URL: /vehicle
-	Datos:
-	Método: GET
+	URL: /vehicle</br>
+	Datos:</br>
+	Método: GET</br>
