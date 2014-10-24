@@ -16,7 +16,7 @@ class UserController extends \BaseController {
             'name' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:users,email|confirmed',
-            'email_confirmation' => 'required|confirmed',
+            'email_confirmation' => 'required',
             'password' => 'required'
         );
         $messages = array(
@@ -62,7 +62,7 @@ class UserController extends \BaseController {
             'name' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:users,email|confirmed',
-            'email_confirmation' => 'required|confirmed',
+            'email_confirmation' => 'required',
             'password' => 'required'
         );
         $messages = array(
