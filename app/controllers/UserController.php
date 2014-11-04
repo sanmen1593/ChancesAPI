@@ -86,7 +86,6 @@ class UserController extends \BaseController {
     }
 
     public function destroy($id) {
-        
     }
 
 }

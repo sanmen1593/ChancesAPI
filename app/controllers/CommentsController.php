@@ -33,10 +33,30 @@ class CommentsController extends \BaseController {
 	public function store()
 	{
 		$data = Input::all();
-                $data['users_id'] = Auth::user()->id;
-                Comment::create($data);
-                return Redirect::back();
+		$rules = array(
+			'users_id' => 'required',
+			'chances_id' => 'required',
+			'text' => 'required|max:140'
+		);
+		$messages = array(
+			'required' => 'The :attribute is required',
+			'max' => 'The :attribute max length must be 140'
+		);
+		$validate = Validator::make($date, $rules, $messages);
+		if($validate->passes()){
+            $data['users_id'] = Auth::user()->id;
+            Comment::create($data);
+            return json_encode(array('message' => 'Commented!'));
+        }
 	}
+
+	/*
+	$table->integer('chances_id')->unsigned();
+            $table->foreign('chances_id')->references('id')->on('chances');
+            $table->integer('users_id')->unsigned();
+            $table->foreign('users_id')->references('id')->on('users');
+            $table->string('text','140');
+    */
 
 	/**
 	 * Display the specified resource.

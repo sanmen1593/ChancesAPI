@@ -44,29 +44,21 @@ class ChanceController extends \BaseController {
             'departure' => 'required',
             'capacity' => 'required|integer',
             'comments' => 'required',
-            'route' => 'required|integer', // 1. Avenida 2. Mamonal 3. Bosque 4. Otros
+            'route' => 'required|integer|min:1|max:4', // 1. Avenida 2. Mamonal 3. Bosque 4. Otros
             'vehicles_id' => 'required|integer'
         );
-        
-        /*
-         $table->float('fee')->nullable();
-            $table->date('date');
-            $table->string('hour');
-            $table->string('destination');
-            $table->string('departure');
-            $table->integer('capacity');
-            $table->string('comments')->nullable();
-            $table->integer('route'); // 1. Avenida 2. Mamonal 3. Bosque 4. Otros
-            $table->integer('vehicles_id')->unsigned();
-         */
+
         $messages = array(
-            '' => ''
+            'required' => 'The :attribute is required.',
+            'integer' => 'The :attribute must be a integer'
         );
         $validate = Validator::make($chance, $rules, $messages);
-        if ($validate) {
+        if ($validate->passes()) {
             $chance['users_id'] = Auth::user()->id;
             Chance::create($chance);
-            return Redirect::intended('/chanceslist');
+            return json_encode(array('message' => 'Chance created.'));
+        }else{
+            return $validate->messages();
         }
     }
 
