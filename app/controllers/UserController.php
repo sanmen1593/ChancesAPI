@@ -11,6 +11,7 @@ class UserController extends \BaseController {
     }
 
     public function store() {
+
         $post_data = Input::all();
         $rules = array(
             'name' => 'required',
@@ -41,13 +42,14 @@ class UserController extends \BaseController {
     }
 
     public function show($id) {
-        $user = User::find($id);
-        if ($user == null) {
+        $user = User::getUserFromToken();
+        $user2 = User::find($id);
+        if ($user2 == null) {
             return json_encode(array('message' => 'El usuario no existe.'));
-        } else if ($user->id == Auth::user()->id) {
-            return Auth::user()->toJson();
-        } else {
+        } else if ($user2->id == $user->id) {
             return $user->toJson();
+        } else {
+            return $user2->toJson();
         }
     }
 
@@ -86,6 +88,7 @@ class UserController extends \BaseController {
     }
 
     public function destroy($id) {
+        
     }
 
 }

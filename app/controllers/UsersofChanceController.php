@@ -7,13 +7,15 @@ class UsersofChanceController extends \BaseController {
     }
 
     public function create() {
-
+        
     }
 
     public function store() {
+        $user = User::getUserFromToken();
+
         $data = Input::all();
         $idchance = $data['chances_id'];
-        $iduser = Auth::user()->id;
+        $iduser = $user->id;
 
         $data['users_id'] = $iduser;
         $chance = Chance::find($idchance);

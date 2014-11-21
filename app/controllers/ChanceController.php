@@ -21,7 +21,8 @@ class ChanceController extends \BaseController {
      * @return Response
      */
     public function create() {
-        $vehicles = Vehicle::where('users_id', '=', Auth::user()->id)->get();
+        $user = User::getUserFromToken();
+        $vehicles = Vehicle::where('users_id', '=', $user->id)->get();
         if ($vehicles->count() > 0) {
             return View::make('chances.create', compact('vehicles'));
         } else {
@@ -35,6 +36,7 @@ class ChanceController extends \BaseController {
      * @return Response
      */
     public function store() {
+        $user = User::getUserFromToken();
         $chance = Input::all();
         $rules = array(
             'fee' => 'required',
@@ -54,10 +56,10 @@ class ChanceController extends \BaseController {
         );
         $validate = Validator::make($chance, $rules, $messages);
         if ($validate->passes()) {
-            $chance['users_id'] = Auth::user()->id;
+            $chance['users_id'] = $user->id;
             Chance::create($chance);
             return json_encode(array('message' => 'Chance created.'));
-        }else{
+        } else {
             return $validate->messages();
         }
     }

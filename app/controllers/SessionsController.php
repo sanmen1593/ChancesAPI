@@ -7,11 +7,7 @@ class SessionsController extends \BaseController {
     }
 
     public function create() {
-        if (Auth::check()) {
-            return Redirect::intended('profile');
-        } else {
             return View::make('sessions.create');
-        }
     }
 
     public function store() {
@@ -33,7 +29,7 @@ class SessionsController extends \BaseController {
             Auth::user()->update(['authentication_token' => $token]);
             return Response::json(['auth_token' => $token]);
         } else {
-            return Response::json(['mesage' => 'Correo y/o contraseña incorrecta. Intente de nuevo']);
+            Response::make('Correo y/o contraseña incorrecta. Intente de nuevo', 401);
         }
     }
 
@@ -50,9 +46,9 @@ class SessionsController extends \BaseController {
     }
 
     public function destroy() {
-        if (Auth::check()) {
-            Auth::user()->update(['authentication_token' => null]);
-            Auth::logout();
+        $user = User::getUserFromToken();
+        if ($user != null) {
+            $user->update(['authentication_token' => '']);
         } else {
             return Redirect::intended('login');
         }

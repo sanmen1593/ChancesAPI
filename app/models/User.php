@@ -19,8 +19,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function vehicles() {
         return $this->hasMany('Vehicle');
     }
-    
-    public function userofchances(){
+
+    public function userofchances() {
         return $this->hasMany('UserofChance', 'users_id', 'id');
     }
 
@@ -84,6 +84,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      */
     public function getReminderEmail() {
         return $this->email;
+    }
+
+    static public function getUserFromToken() {
+        $datos = Input::all();
+        $token = $datos['auth-token'];
+        $user = User::where('authentication_token', '=', $token)->get();
+        return $user[0];
     }
 
 }

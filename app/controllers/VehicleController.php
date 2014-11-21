@@ -3,7 +3,8 @@
 class VehicleController extends \BaseController {
 
     public function index() {
-        $vehicle = Vehicle::where('users_id', '=', Auth::user()->id)->get()->toJson();
+        $user = User::getUserFromToken();
+        $vehicle = Vehicle::where('users_id', '=', $user->id)->get()->toJson();
         return $vehicle;
     }
 
@@ -12,6 +13,7 @@ class VehicleController extends \BaseController {
     }
 
     public function store() {
+        $user = User::getUserFromToken();
         $vehicle = Input::all();
         $rules = array(
             'plate' => array('required', 'unique:vehicles', 'regex:/^[A-Za-z][A-Za-z][A-Za-z][0-9][0-9]([A-Za-z]|[0-9])/'),
@@ -27,11 +29,11 @@ class VehicleController extends \BaseController {
             'plate.regex' => 'Your plate must be like de example: XXX000 or XXX00X'
         );
         $validate = Validator::make($vehicle, $rules, $messages);
-        
+
         if ($validate->fails()) {
             return $validate->messages();
         } else {
-            $vehicle['users_id'] = Auth::user()->id;
+            $vehicle['users_id'] = $user->id;
             $vehicle['status'] = true;
             Vehicle::create($vehicle);
             return json_encode($vehicle);
@@ -49,6 +51,7 @@ class VehicleController extends \BaseController {
     }
 
     public function update($id) {
+        $user = User::getUserFromToken();
         $vehicle = Input::all();
         $rules = array(
             'plate' => array('required', 'unique:vehicles', 'regex:/^[A-Za-z][A-Za-z][A-Za-z][0-9][0-9]([A-Za-z]|[0-9])/'),
@@ -74,7 +77,7 @@ class VehicleController extends \BaseController {
             $vehicle2->type = $vehicle['type'];
             $vehicle2->save();
             return json_encode($vehicle);
-        }else{
+        } else {
             return $validate->messages();
         }
     }

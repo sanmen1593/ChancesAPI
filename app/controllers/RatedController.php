@@ -19,10 +19,11 @@ class RatedController extends \BaseController {
      * @return Response
      */
     public function create() {
+        $user = User::getUserFromToken();
         $array = Input::all();
         $chance = Chance::find($array['chances_id']);
 //        dd($chance->userofchances[0]->users);
-        if ($chance->vehicles->users->id == Auth::user()->id) {
+        if ($chance->vehicles->users->id == $user->id) {
             return View::make('rate.ratechance', compact('chance'));
         } else {
             return View::make('rate.ratepassengerchance', compact('chance'));
@@ -36,8 +37,9 @@ class RatedController extends \BaseController {
      * @return Response
      */
     public function store() {
+        $user = User::getUserFromToken();
         $rate = Input::all();
-        $array = Array('users_id' => Auth::user()->id);
+        $array = Array('users_id' => $user->id);
         $rater = Rater::create($array);
         $rate['raters_id'] = $rater->id;
         Rated::create($rate);
