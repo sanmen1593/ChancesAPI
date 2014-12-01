@@ -35,7 +35,7 @@ class UserController extends \BaseController {
                 User::create($data);
                 $message->to($data['email'], $data['name'])->subject('Welcome to ChancerosUTB!');
             });
-            return json_encode(array('message' => 'Registro éxitoso'));
+            return Response::make('Registro exitoso', 200);
         } else {
             return $validate->messages();
         }
@@ -81,7 +81,7 @@ class UserController extends \BaseController {
             $user2->email = $user['email'];
             $user2->password = $user['password'];
             $user2->save();
-            return json_encode(array('message' => 'Usuario actualizado correctamente.'));
+            return Response::make('Usuario actualizado correctamente.', 200);
         } else {
             return $validate->messages();
         }

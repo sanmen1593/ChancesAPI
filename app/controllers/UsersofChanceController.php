@@ -12,7 +12,6 @@ class UsersofChanceController extends \BaseController {
 
     public function store() {
         $user = User::getUserFromToken();
-
         $data = Input::all();
         $idchance = $data['chances_id'];
         $iduser = $user->id;

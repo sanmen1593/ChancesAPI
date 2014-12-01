@@ -12,7 +12,7 @@ class ChanceController extends \BaseController {
     public function index() {
         $chances = Chance::where('date', '>=', new DateTime('today'))->get(); //->toJson();
 //        return $chances;
-        return View::make('chances.chanceslist', compact('chances'));
+        return array('chances' => $chances);
     }
 
     /**
@@ -72,8 +72,8 @@ class ChanceController extends \BaseController {
      */
     public function show($id) {
         $chance = Chance::find($id);
-        return View::make('chances.showchance', compact('chance'));
-    }
+        return array('chance' => $chance);
+        }
 
     /**
      * Show the form for editing the specified resource.

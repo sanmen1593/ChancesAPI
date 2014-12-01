@@ -49,8 +49,9 @@ class SessionsController extends \BaseController {
         $user = User::getUserFromToken();
         if ($user != null) {
             $user->update(['authentication_token' => '']);
+            return Response::make('Sesión cerrada correctamente', 200);
         } else {
-            return Redirect::intended('login');
+            return Redirect::make('No estás registrado', 401);
         }
     }
 

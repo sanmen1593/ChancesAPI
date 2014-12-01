@@ -4,8 +4,8 @@ class VehicleController extends \BaseController {
 
     public function index() {
         $user = User::getUserFromToken();
-        $vehicle = Vehicle::where('users_id', '=', $user->id)->get()->toJson();
-        return $vehicle;
+        $vehicle = Vehicle::where('users_id', '=', $user->id)->get();
+        return array('vehicle' => $vehicle);
     }
 
     public function create() {
@@ -41,8 +41,8 @@ class VehicleController extends \BaseController {
     }
 
     public function show($id) {
-        $vehicle = Vehicle::find($id)->toJson();
-        return $vehicle;
+        $vehicle = Vehicle::find($id);
+        return array('vehicle' => $vehicle);
     }
 
     public function edit($id) {
