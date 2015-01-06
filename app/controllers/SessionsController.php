@@ -12,9 +12,17 @@ class SessionsController extends \BaseController {
 
     public function store() {
         $input = Input::all();
+        
+        if(is_array($input)){
+            $email = $input['email'];
+            $password = $input['password']
+        }else{
+            $email = $input.email;
+            $password = $input.password;
+        }
         $attempt = Auth::attempt([
-                    'email' => $input['email'],
-                    'password' => $input['password']
+                    'email' => , $email
+                    'password' => $password
         ]);
         if ($attempt) {
             while (true) {
