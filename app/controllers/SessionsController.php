@@ -15,13 +15,13 @@ class SessionsController extends \BaseController {
         
         if(is_array($input)){
             $email = $input['email'];
-            $password = $input['password']
+            $password = $input['password'];
         }else{
             $email = $input.email;
             $password = $input.password;
         }
         $attempt = Auth::attempt([
-                    'email' => , $email
+                    'email' => , $email,
                     'password' => $password
         ]);
         if ($attempt) {
