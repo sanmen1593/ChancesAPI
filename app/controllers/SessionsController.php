@@ -21,7 +21,7 @@ class SessionsController extends \BaseController {
             $password = $input.password;
         }
         $attempt = Auth::attempt([
-                    'email' => , $email,
+                    'email' => $email,
                     'password' => $password
         ]);
         if ($attempt) {
