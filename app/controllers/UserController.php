@@ -3,7 +3,8 @@
 class UserController extends \BaseController {
 
     public function index() {
-        
+        $user = User::getUserFromToken();
+        return $user->toJson();
     }
 
     public function create() {
