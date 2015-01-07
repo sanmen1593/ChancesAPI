@@ -4,7 +4,7 @@ class UserController extends \BaseController {
 
     public function index() {
         $user = User::getUserFromToken();
-        return $user->toJson();
+        return array('user' => $user);
     }
 
     public function create() {
