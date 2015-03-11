@@ -1,15 +1,6 @@
 <?php
 
 class UsersofChanceController extends \BaseController {
-
-    public function index() {
-        
-    }
-
-    public function create() {
-        
-    }
-
     public function store() {
         $user = User::getUserFromToken();
         $data = Input::all();
@@ -27,28 +18,14 @@ class UsersofChanceController extends \BaseController {
         $vehicle = Vehicle::find($chance->vehicles_id);
         if ($vehicle->users_id == $iduser) {
             $message = json_encode(array('message', 'You created this chance'));
+            return $message;
         } else {
             UserofChance::create($data);
             $chance->capacity = $chance->capacity - 1;
             $chance->save();
-            return Redirect::intended('/chanceslist/');
+            $message = json_encode(array('message', 'Chance taken successfully.'));
+            return $message;
+            //return Redirect::intended('/chanceslist/');
         }
     }
-
-    public function show($id) {
-        
-    }
-
-    public function edit($id) {
-        
-    }
-
-    public function update($id) {
-        
-    }
-
-    public function destroy($id) {
-        
-    }
-
 }
